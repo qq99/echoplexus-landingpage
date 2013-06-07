@@ -1,0 +1,94 @@
+!!!
+%html
+	%head
+		%title echoplexus
+		%link{:rel => "stylesheet", :href => "css/all.min.css", :type => "text/css"}
+		%link{:href => "http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css", :rel=>"stylesheet"}
+		%meta{:name=>"viewport", :content=>"width=device-width,initial-scale=1"}
+		%meta{:name=>"description", :content=>"echoplexus - a socket.io powered real-time anonymous chat, collaborative coding REPL, and whiteboard"}
+		%meta{:name=>"author", :content=>"Anthony Cameron"}	
+	%body
+		.content.pure-g-r
+			%header.top-header.pure-u-1
+				.pure-menu.pure-menu-open.pure-menu-fixed.pure-menu-horizontal
+					%a.pure-menu-heading{:href=>"#"} echoplexus
+					%ul.top-nav
+						%li
+							%a{:href=>"#overview"} Overview
+						%li
+							%a{:href=>"#chat"} Chat
+						%li
+							%a{:href=>"#code"} Code
+						%li
+							%a{:href=>"#draw"} Draw
+						%li
+							%a{:href=>"#install"} Install
+						%li
+							%a.iconal.external.different-context{:href=>"https://github.com/qq99/echoplexus", :title => "Echoplexus on Github", :target => "_blank"}
+								%i.icon-github-sign
+						%li
+							%a.iconal.external.different-context{:href=>"https://plus.google.com/u/0/communities/113431458564572439317", :title => "Echoplexus on Google+", :target => "_blank"}
+								%i.icon-google-plus-sign
+						%li
+							%a.iconal.external.different-context{:href=>"https://twitter.com/echoplexus", :title => "Echoplexus on Twitter", :target => "_blank"}
+								%i.icon-twitter-sign
+			%section#overview
+				.readable-section
+					.pure-g-r.splashy
+						.pure-u-1-3
+							.callout{:href=>"#chat"}
+								%i.icon-comments-alt
+								%h2
+									%a{:href => "http://chat.echoplex.us/"} Chat
+								%p No sign up &ndash; seriously.  Start chatting anonymously by visiting a link.  Make a new chat channel by sending a link.
+								%a.call-to-action{:href=>"http://chat.echoplex.us/"} Start chatting.
+						.pure-u-1-3
+							.callout
+								%i.icon-code
+								%h2 
+									%a{:href => "http://chat.echoplex.us/"} Code
+								%p Stuck on a coding problem?  Just want to share a text blob?  Edit and evaluate code in real-time with everybody in the same channel.
+								%a.call-to-action{:href=>"http://chat.echoplex.us/"} More languages coming soon!
+						.pure-u-1-3
+							.callout
+								%i.icon-pencil
+								%h2 
+									%a{:href => "http://chat.echoplex.us/"} Draw
+								%p You may have whiteboards in your office, but can you draw at the same position at the same time?
+								%a.call-to-action{:href=>"http://chat.echoplex.us/"} Play with friends
+					%h1 Overview
+					%p echoplexus was designed to be a modular, anonymous, real-time chatting system.  It's built with open web technologies, and the entire project is open source software (GPLv3 and MIT).  This means that you and your team can clone it, host your own, and instantly have a rich and persistent web chat that rivals many pay-for products.
+					%p echoplexus is built with node.js and powered by socket.io.  backbone.js plays a role in the front-end.
+					%p Currently, it's composed of 3 components: Chat, Code, and Draw. Each has it's own section of server code &ndash; you could conceivably run any combination (or just 1) of these modules, depending on your needs.
+			%section#chat
+				.readable-section			
+					%h1 Chat
+					%p To understand why we think a project like echoplexus is valuable, consider what motivated us:
+					.pure-g-r
+						.pure-u-1-2
+							%ul
+								%li Almost no other chat does a good job at supporting anonymity.  Anonymity fosters free speech.
+								%li Anonymity means no accounts, no set-up, no sign-up.  Users hate signing up for new things.  I hate being required to log in with some social network account.
+								%li IRC is time consuming to set up, and people don't want to download and install a client.  They certainly don't want to have to add custom servers on custom ports.  Such an overhead is certainly not conducive to communication amongst non-technical crowds.
+								%li If you do end up accomplishing the former, you're still stuck with a text-only interface for the majority of the participants.
+						.pure-u-1-2
+							%ul
+								%li Existing chats are not enough.  Google caused an uproar recently with its seeming want to move away from XMPP and break federation.  With echoplexus, you own your data.
+								%li Most other systems are typically 1v1 chat with limited capabilities for media embedding.  How many times have you wanted to share an image or youtube video with somebody  Hangouts might worry you about it's lack of federation. echoplexus makes no claims of federation -- mainly because I do not see how that would work.
+			%section#code
+				.readable-section
+					%h1 Code
+					%p Currently, interactive and collaborative HTML & JavaScript is supported.  The code is run in a sandboxed iframe, but we'd appreciate any audits to this functionality as it makes us a bit nervous!  By default, the iframe has access to jQuery and underscore.js for user convenience.
+					%p Users have the options to enable a LiveReload mode which evaluates the code after all users stop typing.  This should only be used with extreme care.  Regardless of this setting, the REPL is only evaluated if you've got the JavaScript tab open, and LiveReload will become unchecked if you change tabs.
+					%p We hope to support Ruby and Python next, in the near term.  Other languages will come based on support or &ndash; your contribution!
+			%section#draw
+				.readable-section
+					%h1 Draw
+					%p Right now, the Draw capabilities are pretty basic; just enough to facilitate sharing a persistent whiteboard with the people you're chatting with. We calculate a set of cubic bezier splines and transmit them over the wire &ndash; I found it to be a lot more visually appealing.
+					%p There's a lot of deficiencies in this part of the code, and much room for for improvement.  I don't know that we need to re-invent the wheel and re-implement Photoshop/Illustrator here, however.
+			%section#installation
+				.readable-section
+					%h1 Installation
+					%p
+						Please see the instructions on 
+						%a{:href => "https://github.com/qq99/echoplexus"} github.
