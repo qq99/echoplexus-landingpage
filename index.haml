@@ -1,9 +1,9 @@
 !!!
 %html
 	%head
-		%title echoplexus
+		%title echoplexus v0.2.0
 		%link{:rel => "stylesheet", :href => "css/all.min.css", :type => "text/css"}
-		%link{:href => "//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css", :rel=>"stylesheet"}
+		%link{:href => "http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css", :rel=>"stylesheet"}
 		%meta{:name=>"viewport", :content=>"width=device-width,initial-scale=1"}
 		%meta{:name=>"description", :content=>"echoplexus - a socket.io powered real-time anonymous chat, collaborative coding REPL, and whiteboard"}
 		%meta{:name=>"author", :content=>"Anthony Cameron"}	
@@ -11,16 +11,20 @@
 		.content.pure-g-r
 			%header.top-header.pure-u-1
 				.pure-menu.pure-menu-open.pure-menu-fixed.pure-menu-horizontal
-					%a.pure-menu-heading{:href=>"#"} echoplexus
+					%a.pure-menu-heading{:href=>"#"} echoplexus v0.2.0
 					%ul.top-nav
 						%li
 							%a{:href=>"#overview"} Overview
+						%li
+							%a{:href=>"#motivation"} Motivation
 						%li
 							%a{:href=>"#chat"} Chat
 						%li
 							%a{:href=>"#code"} Code
 						%li
 							%a{:href=>"#draw"} Draw
+						%li
+							%a{:href=>"#call"} Call
 						%li
 							%a{:href=>"#install"} Install
 						%li
@@ -35,57 +39,104 @@
 			%section#overview
 				.readable-section
 					.pure-g-r.splashy
-						.pure-u-1-3
-							.callout{:href=>"#chat"}
+						.pure-u-1-2
+							.callout
 								%i.icon-comments-alt
 								%h2
 									%a{:href => "//chat.echoplex.us/"} Chat
 								%p No sign up &ndash; seriously.  Start chatting anonymously by visiting a link.  Make a new chat channel by sending a link.
 								%a.call-to-action{:href=>"//chat.echoplex.us/"} Start chatting.
-						.pure-u-1-3
+						.pure-u-1-2
 							.callout
 								%i.icon-code
 								%h2 
 									%a{:href => "//chat.echoplex.us/"} Code
 								%p Stuck on a coding problem?  Just want to share a text blob?  Edit and evaluate code in real-time with everybody in the same channel.
 								%a.call-to-action{:href=>"//chat.echoplex.us/"} More languages coming soon!
-						.pure-u-1-3
+					.pure-g-r.splashy.second
+						.pure-u-1-2
 							.callout
 								%i.icon-pencil
 								%h2 
 									%a{:href => "//chat.echoplex.us/"} Draw
 								%p You may have whiteboards in your office, but can you draw at the same position at the same time?
-								%a.call-to-action{:href=>"//chat.echoplex.us/"} Play with friends
-					%h1 Overview
-					%p echoplexus was designed to be a modular, anonymous, real-time chatting system.  It's built with open web technologies, and the entire project is open source software (GPLv3 and MIT).  This means that you and your team can clone it, host your own, and instantly have a rich and persistent web chat that rivals many pay-for products.
-					%p echoplexus is built with node.js and powered by socket.io.  backbone.js plays a role in the front-end.
-					%p Currently, it's composed of 3 components: Chat, Code, and Draw. Each has it's own section of server code &ndash; you could conceivably run any combination (or just 1) of these modules, depending on your needs.
-			%section#chat
+								%a.call-to-action{:href=>"//chat.echoplex.us/"} Express yourself.
+						.pure-u-1-2
+							.callout
+								%i.icon-phone
+								%h2
+									%a{:href => "//chat.echoplex.us/"} Call
+								%p Peer2Peer video and audio chat with friends and strangers!  No plugins/installs, just a modern browser.
+								%a.call-to-action{:href=>"//chat.echoplex.us/"} Join in.
+					%h1 echoplexus v0.2.0
+					%p Echoplexus is an anonymous, web-based, IRC-like chatting platform that makes its best effort to respect your privacy.  It allows you to create public or private channels.  You can secure a pseudonym for linkable anonymity (think: `/msg nickserv register ____`.  You can code and draw together in real time.  As of v0.2.0, you can make Peer2Peer video and voice calls with the people in your channel.
+					%p echoplexus was designed to be a modular.  It started from a simple chatting base application and has really grown to encompass many different things.
+					%p Currently, echoplexus is composed of 4 modules: Chat, Code, Draw, and Call.  Conceivably, you could run any combination (or just 1) of these modules, depending on your needs.
+			%section#motivation
 				.readable-section			
-					%h1 Chat
-					%p To understand why we think a project like echoplexus is valuable, consider what motivated us:
+					%h1 Motivation
 					.pure-g-r
-						.pure-u-1-2
+						.pure-u-1-3
 							%ul
-								%li Almost no other chat does a good job at supporting anonymity.  Anonymity fosters free speech.
-								%li Anonymity means no accounts, no set-up, no sign-up.  Users hate signing up for new things.  I hate being required to log in with some social network account.
-								%li IRC is time consuming to set up, and people don't want to download and install a client.  They certainly don't want to have to add custom servers on custom ports.  Such an overhead is certainly not conducive to communication amongst non-technical crowds.
-								%li If you do end up accomplishing the former, you're still stuck with a text-only interface for the majority of the participants.
-						.pure-u-1-2
+								%li Supports anonymity
+								%li Respects your privacy
+								%li No set-up
+								%li No sign-up
+						.pure-u-1-3
 							%ul
-								%li Existing chats are not enough.  Google caused an uproar recently with its seeming want to move away from XMPP and break federation.  With echoplexus, you own your data.
-								%li Most other systems are typically 1v1 chat with limited capabilities for media embedding.  How many times have you wanted to share an image or youtube video with multiple people?  How many times have you clicked on the same link from your friend because you didn't know where it went?
+								%li Rich media in chat (images, youtube, website previews)
+								%li You can own your own data
+								%li Group chat by default
+								%li Private messaging
+						.pure-u-1-3
+							%ul
+								%li Code in real-time, together
+								%li Chat while you code
+								%li Draw together
+								%li Open-source, extend it!
+
+					%p Echoplexus works well for teams that want to enable rich, secure, and truly privacy respecting chat.  Since it's OSS and fairly easy to install, you can have your own private communication infrastructure without needing to rely on cloud services.  There's peace of mind in that.  We've found it's also great for groups of friends who care about their data (and who may or may not be looking at it).
+					%p Many teams might use a pay-to-use web-based communication platform.  There are many out there, and we've derived some inspiration from them in our development.  Echoplexus bridges that gap with open source software.
+					%p Others use IRC.  However, it's somewhat time consuming to set up a server, many people don't really want to set up a client, and they certainly don't want to configure servers and ports in their client.  In the end, most of the users are stuck with a text-only interface (no rich media).  Your IP is also visible to others unless you go through measures to hide it.
+					%p Other services (like Google Talk / Hangouts) are OK, but by default they are 1v1 chat, a closed client platform, and cloud-based.
+					%p Almost all of the alternatives require you to specifiy some kind of name before you start chatting.  Worse, register with an e-mail address.  I always thought the biggest barrier was requiring the user to perform actions he doesn't care about completing -- he's got many other things to do!  Anonymity can be conducive to great conversations.
+			%section#chat
+				.readable-section
+					%h1 Chat
+					%p The most important part of echoplexus is the support for anonymity.  Users hate sign-ups.  Anonymity fosters freedom of speech.  Linkable anonymity is also possible.
+					%p echoplexus will attempt to embed any image URLs directly into the Media bar on the right side.  Similarly, it will attempt to parse YouTube URLs and embed an object.  When the server encounters a URL, it can take a screenshot of the page in question along and attempt to provide a short excerpt to the user.  To protect your privacy, media embedding is disabled for the client by default.
+					%p You can edit any message you've sent up to 2 hours ago, as long as you haven't lost your connection.  You can edit across connections if you were identified when you sent the message.  You can do this by double clicking the message, or clicking the pencil icon that appears while hovering the message.
+					%p When you join a channel, you'll automatically sync some of the most recent chat history you may have missed while you were away.  At any time, you can pull the chatlog history for that channel.  Messages sent by identified users will have a green lock icon while hovering the chat message, allowing you to protect your identity throughout history.
+					%h2 Currently Supported Commands:
+					%ul
+						%li `/join [channel_name]`: Join a channel
+						%li `/nick [your_nickname]`: Changes your name from Anonymous; this preference is stored in a cookie on a per channel basis
+						%li `/register [some_password]`: Facilitates linkable anonymity; people talking to you yesterday can rest assured you're the same person today (and not an impersonator trying to steal your nickname) by registering and identifying.
+						%li `/identify [your_password]`: Assume command of your nickname, and get a green lock icon beside it (signifying to others that you are identified).
+						%li `/private [channel_password]`: Makes a channel private.  Only those with the password may enter it.
+						%li `/password [channel_password]`: Supply the password to a private channel after joining it.  Incorrect attempts will notify everybody in the room.
+						%li `/public`: Make the private channel a public channel.
+						%li `/whisper [nickname]`: Send a private message that is visible to anybody with the nickname you've supplied.  Aliases: `/w`, `/tell`, `/t`, `/pm`.  *Pro-tip:* Press "ctrl+r" to quick-reply to the last person who has whispered you.
+						%li `/pull [N]`: Sync the N latest chat messages that you've missed while you weren't connected to the channel.  Currently, maximum is set to 100 for UI responsiveness until a more efficient rendering method is added.
+						%li `[partial nickname]+<TABKEY>`: Autocompletes (based on L-Distance) to the name of somebody in the channel
+						%li `@[nickname]`: Gets the attention of the user in question
+						%li `/color [#FFFFFF]`: Supply a 6-digit hex code with or without the `#`, and change your nickname's color
+						%li `/edit #[integer] [new body text]`: Changes the body text of a specific message to something else.  Useful for correcting typos and censoring yourself.  You can also double click on a chat message to edit inline-- press enter to confirm, escape or click elsewhere to cancel.
+					%p Note: Nickname registrations are considered on a per-channel basis to increase the available nickspace for all users.  Thus, you will have to register for a specific nickname many times across each channel you join.
 			%section#code
 				.readable-section
 					%h1 Code
-					%p Currently, interactive and collaborative HTML & JavaScript is supported.  The code is run in a sandboxed iframe, but we'd appreciate any audits to this functionality as it makes us a bit nervous!  By default, the iframe has access to jQuery and underscore.js for user convenience.
-					%p Users have the options to enable a LiveReload mode which evaluates the code after all users stop typing.  This should only be used with extreme care.  Regardless of this setting, the REPL is only evaluated if you've got the JavaScript tab open, and LiveReload will become unchecked if you change tabs.
+					%p Currently, interactive and collaborative HTML & JavaScript is supported.  A sandboxed `iframe` is used to protect the contents of your browser, but just to be completely safe, no code is evaluated without your consent.  A `LiveReload` checkbox allows you to re-evaluate as you or someone else types.  A `Refresh` button resets & wipes the `iframe` state.
+					%p The `iframe` has access to `jQuery` and `underscore.js` for user convenience.  More libraries may be exposed in the future.
 					%p We hope to support Ruby and Python next, in the near term.  Other languages will come based on support or &ndash; your contribution!
 			%section#draw
 				.readable-section
 					%h1 Draw
-					%p Right now, the Draw capabilities are pretty basic; just enough to facilitate sharing a persistent whiteboard with the people you're chatting with. We calculate a set of cubic bezier splines and transmit them over the wire &ndash; I found it to be a lot more visually appealing.
-					%p There's a lot of deficiencies in this part of the code, and much room for for improvement.  I don't know that we need to re-invent the wheel and re-implement Photoshop/Illustrator here, however.
+					%p Right now, the Draw capabilities are fairly basic; just enough to facilitate sharing a persistent whiteboard with the people you're chatting with.  I do not think that there is a need to completely re-invent the wheel (and end up re-implementing Photoshop/Illustrator here).
+			%section#call
+				.readable-section
+					%h1 Call
+					%p Make a secure Peer2Peer audio & video call with everyone in the same channel as you, using WebRTC.  For this, you'll probably want to use Chrome Canary/Beta or Firefox Aurora/Beta, which, at the time of writing, have experimental WebRTC support.
 			%section#install
 				.readable-section
 					%h1 Installation
