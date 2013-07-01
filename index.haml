@@ -3,15 +3,17 @@
 	%head
 		%title echoplexus v0.2.0
 		%link{:rel => "stylesheet", :href => "css/all.min.css", :type => "text/css"}
+		%link{:rel => "shortcut icon", :type => "image/png", :href => "/favicon.png"}
 		%link{:href => "//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css", :rel=>"stylesheet"}
 		%meta{:name=>"viewport", :content=>"width=device-width,initial-scale=1"}
-		%meta{:name=>"description", :content=>"echoplexus - a socket.io powered real-time anonymous chat, collaborative coding REPL, and whiteboard"}
+		%meta{:name=>"description", :content=>"echoplexus - a socket.io powered real-time anonymous chat, collaborative coding REPL, whiteboard, WebRTC voice/video calls"}
 		%meta{:name=>"author", :content=>"Anthony Cameron"}	
 	%body
 		.content.pure-g-r
 			%header.top-header.pure-u-1
 				.pure-menu.pure-menu-open.pure-menu-fixed.pure-menu-horizontal
-					%a.pure-menu-heading{:href=>"#"} echoplexus v0.2.0
+					%a.pure-menu-heading{:href=>"#"}
+						%img{:src=> "favicon.png"} echoplexus v0.2.0
 					%ul.top-nav
 						%li
 							%a{:href=>"#overview"} Overview
@@ -68,6 +70,7 @@
 									%a{:href => "//chat.echoplex.us/"} Call
 								%p Peer2Peer video and audio chat with friends and strangers!  No plugins/installs, just a modern browser.
 								%a.call-to-action{:href=>"//chat.echoplex.us/"} Join in.
+					%img#logo{:width=>"180", :height=>"180", :src => "/img/echoplexus-logo.png"}
 					%h1 echoplexus v0.2.0
 					%p Echoplexus is an anonymous, web-based, IRC-like chatting platform that makes its best effort to respect your privacy.  It allows you to create public or private channels.  You can secure a pseudonym for linkable anonymity (think: `/msg nickserv register ____`.  You can code and draw together in real time.  As of v0.2.0, you can make Peer2Peer video and voice calls with the people in your channel.
 					%p echoplexus was designed to be a modular.  It started from a simple chatting base application and has really grown to encompass many different things.
