@@ -6,7 +6,7 @@
 
 body {
 	background:url('../img/noisy_net.png') repeat;
-	color:#ccc;
+	color:#dedede;
 }
 
 @mixin transition($value) {
@@ -98,7 +98,7 @@ section {
 
 #logo {
 	float:left;
-	margin:0 2em 2em 0;
+	margin:2em 2em 2em 0;
 	width:180px;
 	height:180px;
 	max-width:180px;
