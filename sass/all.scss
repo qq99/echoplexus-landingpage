@@ -217,3 +217,55 @@ ul {
 		margin-top:1em;
 	}
 }
+
+.firefox-webapp {
+	display:none;
+}
+
+button.install {
+	background-color: #1793E5;
+	background-image: linear-gradient(#4CB1FF, #1793E5);
+	background-repeat: repeat-x;
+	border-bottom-color: #1793E5;
+	border-radius: 3px;
+	border-bottom-width: 1px solid #1793E5;
+	border-image-outset: 0 0 0 0;
+	border-image-repeat: stretch stretch;
+	border-image-slice: 100% 100% 100% 100%;
+	border-image-source: none;
+	border-image-width: 1 1 1 1;
+	border-left-color: #1793E5;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: #1793E5;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: #1793E5;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	bottom: 15px;
+	color: #FFF;
+	cursor: pointer;
+	display: block;
+	font-family: FeuraSansWeb,"Open Sans","Helvetica Neue",Arial,sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	height: 24px;
+	line-height: 16px;
+	margin: 0;
+	padding: 0.25em 0.75em;
+	text-align: center;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	width: auto;
+	&:hover {
+		background-color: #1584CE;
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2BA3FF), to(#1584CE));
+		background-image: -webkit-linear-gradient(#2BA3FF, #1584CE);
+		background-image: -moz-linear-gradient(#2BA3FF, #1584CE);
+		background-image: -o-linear-gradient(#2BA3FF, #1584CE);
+		background-image: linear-gradient(#2BA3FF, #1584CE);
+	}
+}
