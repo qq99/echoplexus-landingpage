@@ -29,7 +29,7 @@
             };
           };
 
-          if (navigator.mozApp) {
+          if (navigator.mozApps) {
             document.querySelectorAll('.firefox-webapp')[0].style.display = "block";
           }
         };
@@ -161,6 +161,7 @@
             %li `>>[integer]`: Quotes a specific chat message.  Clicking the Reply icon on the chat message will automatically add this for you.
             %li `/chown [password]`: Become the channel owner.  This gives you all permissions in the channel and allows you to `/chmod`
             %li `/chmod [(+|-)permissionName] [optional username]`:  This allows you to selectively toggle on/off certain permissions for the particular channel or user.  User permissions are checked first, and if not set, then channel permissions are checked.  If a username is not supplied, then the permission is specified at the channel level.
+            %li `/github track [github repo URL]`: This generates a URL that you can add to your repo's postreceive hooks on Github.
           %p Example: `/chmod -canSpeak`: now everyone in the channel can't speak unless you do `/chmod [username] +canSpeak` to selectively enable it for a specific user.
           %p The currently implemented list of permissions (and their defaults) includes:
           %ul
@@ -170,6 +171,7 @@
             %li canSpeak: true
             %li canPullLogs: true
             %li canUploadFile: null
+            %li canSetGithubPostReceiveHooks: null
           %p Note: Nickname registrations are considered on a per-channel basis to increase the available nickspace for all users.  Thus, you will have to register for a specific nickname many times across each channel you join.
 
           %h2 Server-hosted file upload
