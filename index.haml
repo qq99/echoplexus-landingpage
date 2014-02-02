@@ -4,7 +4,7 @@
     %title echoplexus v0.2.3
     %link{:rel => "stylesheet", :href => "css/all.min.css", :type => "text/css"}
     %link{:rel => "shortcut icon", :type => "image/png", :href => "/favicon.png"}
-    %link{:href => "//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css", :rel=>"stylesheet"}
+    %link{:href => "https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", :rel=>"stylesheet"}
     %meta{:charset => "UTF-8"}
     %meta{:name=>"viewport", :content=>"width=device-width,initial-scale=1"}
     %meta{:name=>"description", :content=>"echoplexus - a socket.io powered real-time anonymous chat, collaborative coding REPL, whiteboard, WebRTC voice/video calls"}
@@ -30,15 +30,13 @@
           };
 
           if (navigator.mozApps) {
-            document.querySelectorAll('.firefox-webapp')[0].style.display = "block";
+            document.querySelectorAll('.firefox-webapp')[0].style.display = "inline-block";
           }
         };
   %body
     .content.pure-g-r
       %header.top-header.pure-u-1
         .pure-menu.pure-menu-open.pure-menu-fixed.pure-menu-horizontal
-          %a.pure-menu-heading{:href=>"#"}
-            %img{:src=> "favicon.png"} v0.2.3
           %ul.top-nav
             %li
               %a{:href=>"#overview"} Overview
@@ -53,60 +51,68 @@
             %li
               %a{:href=>"#call"} Call
             %li
+              %a{:href=>"#whatsnew"} News
+            %li
               %a{:href=>"#install"} Install
             %li
-              %a.iconal.external.different-context{:href=>"https://github.com/qq99/echoplexus", :title => "Echoplexus on Github", :target => "_blank"}
-                %i.icon-github-sign
+              %a{:href=>"https://blog.echoplex.us", :target=>"_blank"} Blog
             %li
-              %a.iconal.external.different-context{:href=>"https://plus.google.com/u/0/communities/113431458564572439317", :title => "Echoplexus on Google+", :target => "_blank"}
-                %i.icon-google-plus-sign
+              %a.iconal.external.different-context{:href=>"https://github.com/qq99/echoplexus", :title => "Echoplexus on Github", :target => "_blank"}
+                %i.fa.fa-github
             %li
               %a.iconal.external.different-context{:href=>"https://twitter.com/echoplexus", :title => "Echoplexus on Twitter", :target => "_blank"}
-                %i.icon-twitter-sign
+                %i.fa.fa-twitter
       %section#overview
         .readable-section
-          %img#logo{:width=>"180", :height=>"180", :src => "/img/echoplexus-logo.png"}
-          %h1 echoplexus v0.2.3
+          %img#logo{:width=>"180", :height=>"180", :src => "img/echoplexus-logo.png"}
+          %h1
+            echoplexus
+            %small.accent v0.2.3
+          %a.firefox-btn Start chatting!
           .firefox-webapp
-            %button.install{:onclick => "window.installApplication()"} Install the Firefox Application
-          %p Echoplexus is an anonymous, web-based, IRC-like chatting platform that makes its best effort to respect your privacy.  It allows you to create public or private channels.  You can encrypt your chats.  You can secure a pseudonym for linkable anonymity.  You can code and draw together in real time.  You can make free and secure Peer2Peer video and voice calls with the people in your channel using WebRTC.
+            %button.firefox-btn{:onclick => "window.installApplication()"} Install the Firefox Application
+          %p
+            Echoplexus is an anonymous, web-based, IRC-like chatting platform that makes its best effort to respect your privacy.  It allows you to create public or private channels.  You can encrypt your chats.  You can secure a pseudonym for
+            %a{:href=>"http://en.wikipedia.org/wiki/Pseudonymity", :target => "_blank"} linkable anonymity.
+            You can code and draw together in real time.  You can make free and secure Peer2Peer video and voice calls with the people in your channel using WebRTC.
           %p
             Most importantly, echoplexus is open source software. (GPLv3 and MIT)
             %a{:href => "https://github.com/qq99/echoplexus"} Feel free to check out the code on github!
             It's written in CoffeeScript (Backbone, jQuery) and node.js (socket.io) using redis.
-          %p Start chatting:
+          %p
+            Here's a live window into the chat activity of channel '/'
           %div
             %iframe.echoplexus-frame{:src => "https://embed.echoplex.us/embed.html?channel=/", :frameborder=> "0"}
           .pure-g-r.splashy
             .pure-u-1-2
               .callout
-                %i.icon-comments-alt
+                %i.fa.fa-comments-o
                 %h2
-                  %a{:href => "//chat.echoplex.us/"} Chat
+                  %a{:href => "https://chat.echoplex.us/"} Chat
                 %p No sign up &ndash; seriously.  Start chatting anonymously by visiting a link.  Make a new chat channel by sending a link.
-                %a.call-to-action{:href=>"//chat.echoplex.us/"} Start chatting.
+                %a.call-to-action.firefox-btn{:href => "https://chat.echoplex.us"} Start chatting.
             .pure-u-1-2
               .callout
-                %i.icon-code
+                %i.fa.fa-code
                 %h2
-                  %a{:href => "//chat.echoplex.us/"} Code
+                  %a{:href => "https://chat.echoplex.us/"} Code
                 %p Stuck on a coding problem?  Just want to share a text blob?  Edit and evaluate code in real-time with everybody in the same channel.
-                %a.call-to-action{:href=>"//chat.echoplex.us/"} More languages coming soon!
+                %a.call-to-action.firefox-btn{:href=>"https://chat.echoplex.us/"} Start coding.
           .pure-g-r.splashy.second
             .pure-u-1-2
               .callout
-                %i.icon-pencil
+                %i.fa.fa-pencil-square-o
                 %h2
-                  %a{:href => "//chat.echoplex.us/"} Draw
+                  %a{:href => "https://chat.echoplex.us/"} Draw
                 %p You may have whiteboards in your office, but can you draw at the same position at the same time?
-                %a.call-to-action{:href=>"//chat.echoplex.us/"} Express yourself.
+                %a.call-to-action.firefox-btn{:href=>"https://chat.echoplex.us/"} Express yourself.
             .pure-u-1-2
               .callout
-                %i.icon-phone
+                %i.fa.fa-phone
                 %h2
-                  %a{:href => "//chat.echoplex.us/"} Call
+                  %a{:href => "https://chat.echoplex.us/"} Call
                 %p Peer2Peer video and audio chat with friends and strangers!  No plugins/installs, just a modern browser.
-                %a.call-to-action{:href=>"//chat.echoplex.us/"} Join in.
+                %a.call-to-action.firefox-btn{:href=>"https://chat.echoplex.us/"} Join in.
       %section#motivation
         .readable-section
           %h1 Motivation
@@ -195,6 +201,15 @@
         .readable-section
           %h1 Call
           %p Make a secure Peer2Peer audio & video call with everyone in the same channel as you, using WebRTC.  For this, you'll probably want to use Chrome Canary/Beta or Firefox Aurora/Beta, which, at the time of writing, have experimental WebRTC support.
+      %section#whatsnew
+        .readable-section
+          %h1 What's new?
+          %p
+            Please take a look at the channel
+            %a{:href=>"https://chat.echoplex.us/echoplexus-news"} /echoplexus-news
+            for the latest in updates for both the echoplexus project and this instance:
+          %div
+            %iframe.echoplexus-frame{:src => "https://embed.echoplex.us/embed.html?channel=/echoplexus-news", :frameborder=> "0"}
       %section#install
         .readable-section
           %h1 Installation

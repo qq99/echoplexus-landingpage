@@ -35,6 +35,11 @@ h1,h2,h3,h4,h5 {
 	text-shadow:-1px -1px 0 #111;
 }
 
+.pure-menu.pure-menu-open.pure-menu-fixed {
+	border: 0;
+	box-shadow: 1px 1px 0px #333;
+}
+
 .callout {
 	@include transition(all 0.25s ease-in-out);
 	position: relative;
@@ -76,14 +81,11 @@ h1,h2,h3,h4,h5 {
 	}
 
 	&:hover {
-		background:#eee;
-		color:#333;
+		color:#efefef;
 		h2 {
 			text-shadow:none;
 		}
 		i {
-			color:hotpink;
-			text-shadow:-1px -1px 0px #333;
 			@include transform(rotate(-5deg));
 		}
 		a.call-to-action {
@@ -119,7 +121,7 @@ a {
 	text-decoration: none;
 	color:#aa3333;
 	&:hover {
-		color:hotpink;
+		color: greenyellow;
 	}
 }
 
@@ -136,6 +138,10 @@ ul {
 		line-height:1.75em;
 
 	}
+}
+
+.pure-menu li a:hover {
+	background: #333;
 }
 
 .top-header {
@@ -222,7 +228,8 @@ ul {
 	display:none;
 }
 
-button.install {
+a.firefox-btn, button.firefox-btn {
+	display: inline-block;
 	background-color: #1793E5;
 	background-image: linear-gradient(#4CB1FF, #1793E5);
 	background-repeat: repeat-x;
@@ -248,11 +255,9 @@ button.install {
 	bottom: 15px;
 	color: #FFF;
 	cursor: pointer;
-	display: block;
 	font-family: FeuraSansWeb,"Open Sans","Helvetica Neue",Arial,sans-serif;
 	font-size: 13px;
 	font-weight: 400;
-	height: 24px;
 	line-height: 16px;
 	margin: 0;
 	padding: 0.25em 0.75em;
@@ -273,4 +278,22 @@ button.install {
 .echoplexus-frame {
 	width:100%;
 	height:400px;
+}
+
+small.accent {
+	font-size: 50%;
+	color: greenyellow;
+}
+
+@media (max-width: 900px) {
+	.pure-menu-fixed {
+		position: static;
+	}
+	.pure-menu li a {
+		font-size: 0.9em;
+		padding: 5px;
+	}
+	.readable-section {
+		padding-top: 10px;
+	}
 }
