@@ -9,51 +9,24 @@
     %meta{:name=>"viewport", :content=>"width=device-width,initial-scale=1"}
     %meta{:name=>"description", :content=>"echoplexus - a socket.io powered real-time anonymous chat, collaborative coding REPL, whiteboard, WebRTC voice/video calls"}
     %meta{:name=>"author", :content=>"Anthony Cameron"}
-    %script{:type => "text/javascript"}
-      :plain
-        window.onload = function () {
-          console.log("starting");
-          window.installApplication = function () {
-            var manifestLocation = "https://chat.echoplex.us/manifest.webapp";
-            console.log("Attempting to install from", manifestLocation);
-            var installApp = navigator.mozApps.install(manifestLocation);
-
-            // Successful install
-            installApp.onsuccess = function(data) {
-                console.log("Success, app installed!");
-            };
-
-            // Install failed
-            installApp.onerror = function() {
-                console.log("Install failed\n\n:" + installApp.error.name);
-            };
-          };
-
-          if (navigator.mozApps) {
-            document.querySelectorAll('.firefox-webapp')[0].style.display = "inline-block";
-          }
-        };
+    %script{type: "text/javascript", src: "js/jquery-2.1.0.min.js"}
+    %script{type: "text/javascript", src: "js/three.min.js"}
+    %script{type: "text/javascript", src: "js/bg.js"}
+    %script{:type => "text/javascript", src: "js/misc.js"}
   %body
+    .flashy
+      %header.flashy-header echoplexus
+      %img.flashy-logo{:width=>"180", :height=>"180", :src => "img/echoplexus-logo.png"}
     .content.pure-g-r
       %header.top-header.pure-u-1
-        .pure-menu.pure-menu-open.pure-menu-fixed.pure-menu-horizontal
+        .pure-menu.pure-menu-open.pure-menu-horizontal
           %ul.top-nav
             %li
-              %a{:href=>"#overview"} Overview
+              %a{:href=>"#overview"} What?
             %li
-              %a{:href=>"#motivation"} Motivation
-            %li
-              %a{:href=>"#chat"} Chat
-            %li
-              %a{:href=>"#code"} Code
-            %li
-              %a{:href=>"#draw"} Draw
-            %li
-              %a{:href=>"#call"} Call
+              %a{:href=>"#motivation"} Why?
             %li
               %a{:href=>"#whatsnew"} News
-            %li
-              %a{:href=>"#install"} Install
             %li
               %a{:href=>"https://blog.echoplex.us", :target=>"_blank"} Blog
             %li
@@ -64,7 +37,6 @@
                 %i.fa.fa-twitter
       %section#overview
         .readable-section
-          %img#logo{:width=>"180", :height=>"180", :src => "img/echoplexus-logo.png"}
           %h1
             echoplexus
             %small.accent v0.2.3
@@ -79,10 +51,6 @@
             Most importantly, echoplexus is open source software. (GPLv3 and MIT)
             %a{:href => "https://github.com/qq99/echoplexus"} Feel free to check out the code on github!
             It's written in CoffeeScript (Backbone, jQuery) and node.js (socket.io) using redis.
-          %p
-            Here's a live window into the chat activity of channel '/'
-          %div
-            %iframe.echoplexus-frame{:src => "https://embed.echoplex.us/embed.html?channel=/", :frameborder=> "0"}
           .pure-g-r.splashy
             .pure-u-1-2
               .callout
@@ -209,7 +177,7 @@
             %a{:href=>"https://chat.echoplex.us/echoplexus-news"} /echoplexus-news
             for the latest in updates for both the echoplexus project and this instance:
           %div
-            %iframe.echoplexus-frame{:src => "https://embed.echoplex.us/embed.html?channel=/echoplexus-news", :frameborder=> "0"}
+            %iframe.echoplexus-frame{:eventual_src => "https://embed.echoplex.us/embed.html?channel=/echoplexus-news", :frameborder=> "0"}
       %section#install
         .readable-section
           %h1 Installation
