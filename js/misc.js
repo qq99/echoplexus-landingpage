@@ -16,8 +16,17 @@ $(document).ready(function () {
   };
 
   if (navigator.mozApps) {
-    $('.firefox-webapp').show();
+    $('.firefox-webapp').css("display", "inline-block");
   }
+
+  // hacky buttons that are actually links
+  $("button").on("click", function (ev) {
+    var src = $(ev.target).attr("href");
+    console.log(src);
+    if (src) {
+      window.location = src;
+    }
+  });
 
   var $iframes = $("iframe");
   var srcs = [];
