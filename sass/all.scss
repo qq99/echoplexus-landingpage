@@ -3,13 +3,6 @@
 * {
 	font-family: 'Roboto','Helvetica Neue',Helvetica,arial,freesans,clean,sans-serif;
 }
-@font-face {
-  font-family: 'Unica One';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Unica One'), local('UnicaOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/unicaone/v2/z3VYemEbD7zsQFQLG6g3SrO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-}
-
 html, body {
 	color:#dedede;
 	width: 100%;
@@ -32,7 +25,7 @@ body {
 	font-size: 4em;
 	text-align: center;
 	color: #daf6f5;
-	font-family: 'Unica One', cursive;
+	font-family: 'Unica One','Roboto','Helvetica Neue',Helvetica,arial,freesans,clean,sans-serif;
 	text-shadow: 1px 1px 0px #0c1d1c;
 }
 .flashy-logo {
