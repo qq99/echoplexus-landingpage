@@ -130,8 +130,10 @@ $(document).ready(function () {
     geometry.computeFaceNormals();
     // geometry.computeVertexNormals();
   }
+  render_blocked = false;
   var render = function () {
     requestAnimationFrame(render);
+    if (render_blocked) { return; }
     DEPTH += 0.0075;
     alter();
     renderer.render(scene, camera);
@@ -141,6 +143,14 @@ $(document).ready(function () {
   $(".flashy").on("mousemove", function (ev)  {
     if (ev.clientX && ev.clientY) {
       directionalLight.position.set(lightX + ev.clientX, lightY - ev.clientY, 2000);
+    }
+  });
+
+  $(window).on("scroll", function (ev) {
+    if (window.scrollY > ch) {
+      render_blocked = true;
+    } else {
+      render_blocked = false;
     }
   });
 });
