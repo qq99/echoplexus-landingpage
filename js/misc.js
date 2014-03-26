@@ -19,6 +19,10 @@ $(document).ready(function () {
     $('.firefox-webapp').css("display", "inline-block");
   }
 
+  if (navigator.userAgent.toLowerCase().indexOf("android") > 0) {
+    $('.android-apk').css("display", "inline-block");
+  }
+
   // hacky buttons that are actually links
   $("button").on("click", function (ev) {
     var src = $(ev.target).attr("href");
