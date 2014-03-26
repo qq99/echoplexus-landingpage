@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title echoplexus v0.2.3
+    %title echoplexus v0.2.4
     %link{:rel => "stylesheet", :href => "css/all.min.css", :type => "text/css"}
     %link{:rel => "shortcut icon", :type => "image/png", :href => "/favicon.png"}
     %link{href: 'https://fonts.googleapis.com/css?family=Unica+One', rel:'stylesheet', type:'text/css'}
@@ -40,16 +40,17 @@
         .readable-section
           %h1
             echoplexus
-            %small.accent v0.2.3
+            %small.accent v0.2.4
           %button.firefox-btn{:href => "https://chat.echoplex.us"} Start chatting!
           .firefox-webapp
             %button.firefox-btn{:onclick => "window.installApplication()"} Install the Firefox Application
           .android-apk
             %button.firefox-btn{:href => "/echoplexus.apk"} Install the Android Application
           %p
-            Echoplexus is an anonymous, web-based, IRC-like chatting platform that makes its best effort to respect your privacy.  It allows you to create public or private channels.  You can encrypt your chats.  You can secure a pseudonym for
-            %a{:href=>"http://en.wikipedia.org/wiki/Pseudonymity", :target => "_blank"} linkable anonymity.
-            You can code and draw together in real time.  You can make free and secure Peer2Peer video and voice calls with the people in your channel using WebRTC.
+            Echoplexus is an anonymous, web-based, IRC-like chatting platform that makes its best effort to respect your privacy.  It allows you to create public or private channels.  You can secure a pseudonym for
+            %a{:href=>"http://en.wikipedia.org/wiki/Pseudonymity", :target => "_blank"} linkable anonymity,
+            and
+            %a{:href=>"https://blog.echoplex.us/2014/03/05/echoplexus-and-pgp/"} secure it with PGP.
           %p
             Most importantly, echoplexus is open source software. (GPLv3 and MIT)
             %a{:href => "https://github.com/qq99/echoplexus"} Feel free to check out the code on github!
@@ -127,8 +128,6 @@
             %li `/topic [topic string]`: Set the topic of conversation for the channel (the message that sits visible at all times at the top)
             %li `/broadcast [a chat message]`: Send the message to every channels that you're connected to.  Alias: `/bc`
             %li `/nick [your_nickname]`: Changes your name from Anonymous; this preference is stored in a cookie on a per channel basis
-            %li `/register [some_password]`: Facilitates linkable anonymity; people talking to you yesterday can rest assured you're the same person today (and not an impersonator trying to steal your nickname) by registering and identifying.
-            %li `/identify [your_password]`: Assume command of your nickname, and get a green lock icon beside it (signifying to others that you are identified).
             %li `/private [channel_password]`: Makes a channel private.  Only those with the password may enter it.
             %li `/password [channel_password]`: Supply the password to a private channel after joining it.  Incorrect attempts will notify everybody in the room.
             %li `/public`: Make the private channel a public channel.
@@ -152,7 +151,6 @@
             %li canPullLogs: true
             %li canUploadFile: null
             %li canSetGithubPostReceiveHooks: null
-          %p Note: Nickname registrations are considered on a per-channel basis to increase the available nickspace for all users.  Thus, you will have to register for a specific nickname many times across each channel you join.
 
           %h2 Server-hosted file upload
           %p You can upload a file by dragging it onto the "Media & Links" panel.  From there, you'll have the option of confirming the upload, as well as an image preview (if it is an image).
