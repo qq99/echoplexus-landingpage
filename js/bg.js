@@ -1,6 +1,8 @@
 // this file is filled with hacky shit
 // investigate at your own peril!
 $(document).ready(function () {
+
+  if (!window.WebGLRenderingContext) { return; }
   // http://mrl.nyu.edu/~perlin/noise/
   // Copyright 2002 Ken Perlin
   // ported by Anthony Cameron
@@ -95,62 +97,66 @@ $(document).ready(function () {
   var ty = parseInt(tx * (ch/cw), 10);
   //ty = 1; // pretty damn neat
 
-  var renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(cw, ch);
-  $container.append(renderer.domElement);
-  var geometry = new THREE.PlaneGeometry(cw*1.5,ch*1.5,tx,ty);
-  var material = new THREE.MeshPhongMaterial( {
-      color: 0x153433,
-      ambient: 0x393333, // should generally match color
-      specular: 0x535555,
-      shininess: 15,
-      shading: THREE.FlatShading
-  } ) ;
-  var cube = new THREE.Mesh(geometry, material);
-  cube.rotateOnAxis(new THREE.Vector3( 1, 0, 0 ), 0.45);
-  scene.add(cube);
-  camera.position.z = 300;
-  camera.lookAt( scene.position );
-  var clamp = function (value, min, max) {
-    return Math.min(Math.max(min, value), max);
-  };
-  DEPTH = 0;
-  var alter = function () {
-    for (var i = 0; i < geometry.vertices.length; i++) {
-      var u = i/geometry.vertices.length - 0.5;
-      var v = (i%50) / (geometry.vertices.length / 50) - 0.5;
+  try {
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(cw, ch);
+    $container.append(renderer.domElement);
+    var geometry = new THREE.PlaneGeometry(cw*1.5,ch*1.5,tx,ty);
+    var material = new THREE.MeshPhongMaterial( {
+        color: 0x153433,
+        ambient: 0x393333, // should generally match color
+        specular: 0x535555,
+        shininess: 15,
+        shading: THREE.FlatShading
+    } ) ;
+    var cube = new THREE.Mesh(geometry, material);
+    cube.rotateOnAxis(new THREE.Vector3( 1, 0, 0 ), 0.45);
+    scene.add(cube);
+    camera.position.z = 300;
+    camera.lookAt( scene.position );
+    var clamp = function (value, min, max) {
+      return Math.min(Math.max(min, value), max);
+    };
+    DEPTH = 0;
+    var alter = function () {
+      for (var i = 0; i < geometry.vertices.length; i++) {
+        var u = i/geometry.vertices.length - 0.5;
+        var v = (i%50) / (geometry.vertices.length / 50) - 0.5;
 
-      // u = Math.sin(u+DEPTH*0.01)
-      // v = Math.cos(v+DEPTH*0.01);
+        // u = Math.sin(u+DEPTH*0.01)
+        // v = Math.cos(v+DEPTH*0.01);
 
-      var n = turbulence(u,v,20, DEPTH, 2);
-      geometry.vertices[i].z = 20*n;
+        var n = turbulence(u,v,20, DEPTH, 2);
+        geometry.vertices[i].z = 20*n;
+      }
+      geometry.verticesNeedUpdate = true;
+      geometry.computeFaceNormals();
+      // geometry.computeVertexNormals();
     }
-    geometry.verticesNeedUpdate = true;
-    geometry.computeFaceNormals();
-    // geometry.computeVertexNormals();
+    render_blocked = false;
+    var render = function () {
+      requestAnimationFrame(render);
+      if (render_blocked) { return; }
+      DEPTH += 0.0075;
+      alter();
+      renderer.render(scene, camera);
+    };
+    render();
+
+    $(".flashy").on("mousemove", function (ev)  {
+      if (ev.clientX && ev.clientY) {
+        directionalLight.position.set(lightX + ev.clientX, lightY - ev.clientY, 2000);
+      }
+    });
+
+    $(window).on("scroll", function (ev) {
+      if (window.scrollY > ch) {
+        render_blocked = true;
+      } else {
+        render_blocked = false;
+      }
+    });
+  } catch {
+    console.log("WebGL failed hard.");
   }
-  render_blocked = false;
-  var render = function () {
-    requestAnimationFrame(render);
-    if (render_blocked) { return; }
-    DEPTH += 0.0075;
-    alter();
-    renderer.render(scene, camera);
-  };
-  render();
-
-  $(".flashy").on("mousemove", function (ev)  {
-    if (ev.clientX && ev.clientY) {
-      directionalLight.position.set(lightX + ev.clientX, lightY - ev.clientY, 2000);
-    }
-  });
-
-  $(window).on("scroll", function (ev) {
-    if (window.scrollY > ch) {
-      render_blocked = true;
-    } else {
-      render_blocked = false;
-    }
-  });
 });
