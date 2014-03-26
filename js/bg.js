@@ -156,7 +156,7 @@ $(document).ready(function () {
         render_blocked = false;
       }
     });
-  } catch {
+  } catch (err) {
     console.log("WebGL failed hard.");
   }
 });
