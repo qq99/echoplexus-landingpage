@@ -240,11 +240,6 @@ ul {
 	.images {
 		padding:1em;
 	}
-	img {
-		width:100%;
-		max-width:100%;
-		height:auto;
-	}
 	ul, ol {
 		text-align: justify;
 		@include box-sizing(border-box);
