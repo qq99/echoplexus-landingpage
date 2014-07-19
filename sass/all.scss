@@ -51,6 +51,7 @@ body {
 .content.pure-g-r {
 	position: relative;
 	top: -36px; // shift it upwards
+	padding-bottom: 5em;
 }
 
 @mixin transition($value) {
