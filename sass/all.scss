@@ -241,7 +241,7 @@ ul {
 
 .top-nav {
 	list-style-type: none;
-	width: 50em;
+	max-width: 52em;
 	height: 36px;
 	margin: auto;
 	display: block;
@@ -251,6 +251,12 @@ ul {
 		vertical-align: middle;
 		display: inline-block;
 		position: relative;
+		button {
+			margin-top: 5px;
+		}
+	}
+	li:last-child {
+		margin-right: 1em;
 	}
 	a {
 		height: 100%;
@@ -425,8 +431,33 @@ small.accent {
 	vertical-align: top;
 	text-rendering: auto;
 }
+.lowres {
+	display: none;
+}
 
-@media (max-width: 900px) {
+@media (max-width: 720px) {
+	.lowres {
+		display: block;
+	}
+	.highres {
+		display: none !important;
+	}
+	.top-nav {
+		height: auto;
+		li {
+			display: block;
+			background: #222;
+			width: 100% !important;
+			text-align: center;
+			margin: 0 !important;
+			border-bottom: 1px solid #333;
+		}
+		a {
+			width: 100% !important;
+			height: 100% !important;
+			padding: 1em !important;
+		}
+	}
 	img.pull-right, img.pull-left {
 		max-width: 100%;
 		float: none;
