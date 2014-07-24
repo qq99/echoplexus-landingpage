@@ -15,17 +15,19 @@
     %script{type: "text/javascript", src: "js/bg.js"}
     %script{:type => "text/javascript", src: "js/misc.js"}
   %body
-    .flashy
-      %header.flashy-header echoplexus
+    .flashy{style: 'height: 500px;'}
+      %header.flashy-header
+        echoplexus
+        %small.accent v0.2.5
       %img.flashy-logo{:width=>"180", :height=>"180", :src => "img/echoplexus-logo.png"}
-    .content.pure-g-r
+    .main-content
       %header.top-header.pure-u-1
         .pure-menu.pure-menu-open.pure-menu-horizontal
           %ul.top-nav
             %li
-              %a{:href=>"#overview"} What?
+              %a{:href=>"#overview"} Features
             %li
-              %a{:href=>"#motivation"} Why?
+              %a{:href=>"#motivation"} Motivation
             %li
               %a{:href=>"#whatsnew"} News
             %li
@@ -36,12 +38,13 @@
             %li
               %a.iconal.external.different-context{:href=>"https://twitter.com/echoplexus", :title => "Echoplexus on Twitter", :target => "_blank"}
                 %i.fa.fa-twitter
+            %li.pull-right
+              %button.firefox-btn{:href => "https://chat.echoplex.us"} Start chatting!
       %section#overview
         .readable-section
           %h1
             echoplexus
-            %small.accent v0.2.5
-          %button.firefox-btn{:href => "https://chat.echoplex.us"} Start chatting!
+
           .firefox-webapp
             %button.firefox-btn{:onclick => "window.installApplication()"} Install the Firefox Application
           / .android-apk
@@ -85,6 +88,73 @@
                   %a{:href => "https://chat.echoplex.us/"} Call
                 %p Peer2Peer video and audio chat with friends and strangers!  No plugins/installs, just a modern browser.
                 %button.call-to-action.firefox-btn{:href=>"https://chat.echoplex.us/"} Join in.
+      %section#chat
+        .readable-section
+          %img{src: './img/features/chat-view.png'}
+          %h1 Chat
+          %p The most important part of echoplexus is the support for anonymity. Users hate sign-ups. Anonymity fosters freedom of speech. Linkable anonymity is also possible.
+          %p echoplexus will attempt to embed any image URLs directly into the Media bar on the right side. Similarly, it will attempt to parse YouTube URLs and embed an object. When the server encounters a URL, it can take a screenshot of the page in question along and attempt to provide a short excerpt to the user. To protect your privacy, media embedding is disabled for the client by default.
+          %p You can edit any message you've sent up to 2 hours ago, as long as you haven't lost your connection. This duration is configurable by server operators. You can do this by double clicking the message, or clicking the pencil icon that appears while hovering the message.
+          %p When you join a channel, you'll automatically sync some of the most recent chat history you may have missed while you were away. At any time, you can pull the chatlog history for that channel.
+          %h2 Currently Supported Commands:
+          %ul
+            %li `/join [channel_name]`: Join a channel
+            %li `/leave`: Leaves the current channel
+            %li `/topic [topic string]`: Set the topic of conversation for the channel (the message that sits visible at all times at the top)
+            %li `/broadcast [a chat message]`: Send the message to every channels that you're connected to.  Alias: `/bc`
+            %li `/nick [your_nickname]`: Changes your name from Anonymous; this preference is stored in a cookie on a per channel basis
+            %li `/private [channel_password]`: Makes a channel private.  Only those with the password may enter it.
+            %li `/password [channel_password]`: Supply the password to a private channel after joining it.  Incorrect attempts will notify everybody in the room.
+            %li `/public`: Make the private channel a public channel.
+            %li `/whisper [nickname]`: Send a private message that is visible to anybody with the nickname you've supplied.  Aliases: `/w`, `/tell`, `/t`, `/pm`.  *Pro-tip:* Press "ctrl+r" to quick-reply to the last person who has whispered you.
+            %li `/pull [N]`: Sync the N latest chat messages that you've missed while you weren't connected to the channel.  Currently, maximum is set to 100 for UI responsiveness until a more efficient rendering method is added.
+            %li `[partial nickname]+<TABKEY>`: Autocompletes (based on L-Distance) to the name of somebody in the channel
+            %li `@[nickname]`: Gets the attention of the user in question
+            %li `/color [#FFFFFF]`: Supply a 6-digit hex code with or without the `#`, and change your nickname's color
+            %li `/edit #[integer] [new body text]`: Changes the body text of a specific message to something else.  Useful for correcting typos and censoring yourself.  You can also double click on a chat message to edit inline-- press enter to confirm, escape or click elsewhere to cancel.
+            %li `>>[integer]`: Quotes a specific chat message.  Clicking the Reply icon on the chat message will automatically add this for you.
+            %li `/chown [password]`: Become the channel owner.  This gives you all permissions in the channel and allows you to `/chmod`
+            %li `/chmod [(+|-)permissionName] [optional username]`:  This allows you to selectively toggle on/off certain permissions for the particular channel or user.  User permissions are checked first, and if not set, then channel permissions are checked.  If a username is not supplied, then the permission is specified at the channel level.
+            %li
+              `/github track [github repo URL]`: This generates a URL that you can add to your repo's postreceive hooks on Github.
+
+          %img{src: './img/features/github-integration-2.png'}
+
+          %p Example: `/chmod -canSpeak`: now everyone in the channel can't speak unless you do `/chmod [username] +canSpeak` to selectively enable it for a specific user.
+          %p The currently implemented list of permissions (and their defaults) includes:
+          %ul
+            %li canSetTopic: null
+            %li canMakePrivate: null
+            %li canMakePublic: null
+            %li canSpeak: true
+            %li canPullLogs: true
+            %li canUploadFile: null
+            %li canSetGithubPostReceiveHooks: null
+
+          %h2 Server-hosted file upload
+          %p You can upload a file by dragging it onto the "Media & Links" panel.  From there, you'll have the option of confirming the upload, as well as an image preview (if it is an image).
+          %p For server operators, this must be enabled in `config.js` (see `config.sample.js`).  You have the option of setting a max file size limit.  Further, it must be enabled on a per-channel basis by the channel operator.  If there is not yet a channel operator, you will need to `/chown [operator password]` to become it (see `Commands` above).
+      %section#code
+        / https://www.flickr.com/photos/riebart/4466482623
+        .readable-section
+          %img{src: './img/features/coding.png'}
+          %h1 Code
+          %p Currently, interactive and collaborative HTML & JavaScript is supported.  A sandboxed `iframe` is used to protect the contents of your browser, but just to be completely safe, no code is evaluated without your consent.  A `LiveReload` checkbox allows you to re-evaluate as you or someone else types.  A `Refresh` button resets & wipes the `iframe` state.
+          %p The `iframe` has access to `jQuery` and `underscore.js` for user convenience.  More libraries may be exposed in the future.
+          %p We hope to support Ruby and Python next, in the near term.  Other languages will come based on support or &ndash; your contribution!
+      %section#draw
+        / https://www.flickr.com/photos/ellebeere/4605043024
+        .readable-section
+          %img.pull-left{src: './img/features/drawing.png'}
+          %h1 Draw
+          %p Right now, the Draw capabilities are fairly basic; just enough to facilitate sharing a persistent whiteboard with the people you're chatting with.  I do not think that there is a need to completely re-invent the wheel (and end up re-implementing Photoshop/Illustrator here).
+      %section#call
+        / https://www.flickr.com/photos/suckamc/11059685
+        .readable-section
+          %img.pull-right{src: './img/features/no-call.png'}
+          %h1 Call
+          %p Make a secure Peer2Peer audio & video call with everyone in the same channel as you, using WebRTC.
+          %p You'll want to use Chrome Canary/Beta or Firefox Aurora/Beta, which, at the time of writing, have experimental WebRTC support.
       %section#motivation
         .readable-section
           %h1 Motivation
@@ -114,62 +184,6 @@
           %p Others use IRC. However, it's somewhat time consuming to set up a server, many people don't really want to set up a client, and they certainly don't want to configure servers and ports in their client. In the end, most of the users are stuck with a text-only interface (no rich media). Your IP is also visible to others unless you go through measures to hide it.
           %p Other services (like Google Talk / Hangouts) are OK, but by default they are 1v1 chat, a closed client platform, and cloud-based.
           %p Almost all of the alternatives require you to specifiy some kind of name before you start chatting. Worse, register with an e-mail address. I always thought the biggest barrier was requiring the user to perform actions he doesn't care about completing -- he's got many other things to do! Anonymity can be conducive to great conversations.
-      %section#chat
-        .readable-section
-          %h1 Chat
-          %p The most important part of echoplexus is the support for anonymity. Users hate sign-ups. Anonymity fosters freedom of speech. Linkable anonymity is also possible.
-          %p echoplexus will attempt to embed any image URLs directly into the Media bar on the right side. Similarly, it will attempt to parse YouTube URLs and embed an object. When the server encounters a URL, it can take a screenshot of the page in question along and attempt to provide a short excerpt to the user. To protect your privacy, media embedding is disabled for the client by default.
-          %p You can edit any message you've sent up to 2 hours ago, as long as you haven't lost your connection. This duration is configurable by server operators. You can do this by double clicking the message, or clicking the pencil icon that appears while hovering the message.
-          %p When you join a channel, you'll automatically sync some of the most recent chat history you may have missed while you were away. At any time, you can pull the chatlog history for that channel.
-          %h2 Currently Supported Commands:
-          %ul
-            %li `/join [channel_name]`: Join a channel
-            %li `/leave`: Leaves the current channel
-            %li `/topic [topic string]`: Set the topic of conversation for the channel (the message that sits visible at all times at the top)
-            %li `/broadcast [a chat message]`: Send the message to every channels that you're connected to.  Alias: `/bc`
-            %li `/nick [your_nickname]`: Changes your name from Anonymous; this preference is stored in a cookie on a per channel basis
-            %li `/private [channel_password]`: Makes a channel private.  Only those with the password may enter it.
-            %li `/password [channel_password]`: Supply the password to a private channel after joining it.  Incorrect attempts will notify everybody in the room.
-            %li `/public`: Make the private channel a public channel.
-            %li `/whisper [nickname]`: Send a private message that is visible to anybody with the nickname you've supplied.  Aliases: `/w`, `/tell`, `/t`, `/pm`.  *Pro-tip:* Press "ctrl+r" to quick-reply to the last person who has whispered you.
-            %li `/pull [N]`: Sync the N latest chat messages that you've missed while you weren't connected to the channel.  Currently, maximum is set to 100 for UI responsiveness until a more efficient rendering method is added.
-            %li `[partial nickname]+<TABKEY>`: Autocompletes (based on L-Distance) to the name of somebody in the channel
-            %li `@[nickname]`: Gets the attention of the user in question
-            %li `/color [#FFFFFF]`: Supply a 6-digit hex code with or without the `#`, and change your nickname's color
-            %li `/edit #[integer] [new body text]`: Changes the body text of a specific message to something else.  Useful for correcting typos and censoring yourself.  You can also double click on a chat message to edit inline-- press enter to confirm, escape or click elsewhere to cancel.
-            %li `>>[integer]`: Quotes a specific chat message.  Clicking the Reply icon on the chat message will automatically add this for you.
-            %li `/chown [password]`: Become the channel owner.  This gives you all permissions in the channel and allows you to `/chmod`
-            %li `/chmod [(+|-)permissionName] [optional username]`:  This allows you to selectively toggle on/off certain permissions for the particular channel or user.  User permissions are checked first, and if not set, then channel permissions are checked.  If a username is not supplied, then the permission is specified at the channel level.
-            %li `/github track [github repo URL]`: This generates a URL that you can add to your repo's postreceive hooks on Github.
-          %p Example: `/chmod -canSpeak`: now everyone in the channel can't speak unless you do `/chmod [username] +canSpeak` to selectively enable it for a specific user.
-          %p The currently implemented list of permissions (and their defaults) includes:
-          %ul
-            %li canSetTopic: null
-            %li canMakePrivate: null
-            %li canMakePublic: null
-            %li canSpeak: true
-            %li canPullLogs: true
-            %li canUploadFile: null
-            %li canSetGithubPostReceiveHooks: null
-
-          %h2 Server-hosted file upload
-          %p You can upload a file by dragging it onto the "Media & Links" panel.  From there, you'll have the option of confirming the upload, as well as an image preview (if it is an image).
-          %p For server operators, this must be enabled in `config.js` (see `config.sample.js`).  You have the option of setting a max file size limit.  Further, it must be enabled on a per-channel basis by the channel operator.  If there is not yet a channel operator, you will need to `/chown [operator password]` to become it (see `Commands` above).
-
-      %section#code
-        .readable-section
-          %h1 Code
-          %p Currently, interactive and collaborative HTML & JavaScript is supported.  A sandboxed `iframe` is used to protect the contents of your browser, but just to be completely safe, no code is evaluated without your consent.  A `LiveReload` checkbox allows you to re-evaluate as you or someone else types.  A `Refresh` button resets & wipes the `iframe` state.
-          %p The `iframe` has access to `jQuery` and `underscore.js` for user convenience.  More libraries may be exposed in the future.
-          %p We hope to support Ruby and Python next, in the near term.  Other languages will come based on support or &ndash; your contribution!
-      %section#draw
-        .readable-section
-          %h1 Draw
-          %p Right now, the Draw capabilities are fairly basic; just enough to facilitate sharing a persistent whiteboard with the people you're chatting with.  I do not think that there is a need to completely re-invent the wheel (and end up re-implementing Photoshop/Illustrator here).
-      %section#call
-        .readable-section
-          %h1 Call
-          %p Make a secure Peer2Peer audio & video call with everyone in the same channel as you, using WebRTC.  For this, you'll probably want to use Chrome Canary/Beta or Firefox Aurora/Beta, which, at the time of writing, have experimental WebRTC support.
       %section#whatsnew
         .readable-section
           %h1 What's new?

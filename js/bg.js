@@ -87,7 +87,7 @@ $(document).ready(function () {
 
   var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.75 );
   lightX = 0;
-  lightY = -1000;
+  lightY = 3000;
   directionalLight.position.set(lightX, lightY, 2000);
   scene.add( directionalLight );
 
@@ -103,7 +103,7 @@ $(document).ready(function () {
     $container.append(renderer.domElement);
     var geometry = new THREE.PlaneGeometry(cw*1.5,ch*1.5,tx,ty);
     var material = new THREE.MeshPhongMaterial( {
-        color: 0x153433,
+        color: 0x151413,
         ambient: 0x393333, // should generally match color
         specular: 0x535555,
         shininess: 15,
@@ -134,10 +134,21 @@ $(document).ready(function () {
       // geometry.computeVertexNormals();
     }
     render_blocked = false;
+    mouseOffset = [0, 0];
+
+    var mod = 1;
     var render = function () {
+      var now = Number(new Date());
       requestAnimationFrame(render);
       if (render_blocked) { return; }
       DEPTH += 0.0075;
+      if (mod > 0) {
+        mod -= 0.0025;
+      }
+      if (mod > 0 && lightY > -450) {
+        lightY-= mod*20;
+      }
+      directionalLight.position.set(lightX + mouseOffset[0], lightY - mouseOffset[1], 2000);
       alter();
       renderer.render(scene, camera);
     };
@@ -145,7 +156,8 @@ $(document).ready(function () {
 
     $(".flashy").on("mousemove", function (ev)  {
       if (ev.clientX && ev.clientY) {
-        directionalLight.position.set(lightX + ev.clientX, lightY - ev.clientY, 2000);
+        mouseOffset[0] = ((ev.clientX/(0.5*cw)) - 1) * 800;
+        mouseOffset[1] = ((ev.clientY/(0.5*ch)) - 1) * 400;
       }
     });
 
