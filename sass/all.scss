@@ -432,7 +432,7 @@ small.accent {
 	text-rendering: auto;
 }
 .lowres {
-	display: none;
+	display: none !important;
 }
 
 @media (max-width: 720px) {
@@ -441,7 +441,7 @@ small.accent {
 		display: block;
 	}
 	.lowres {
-		display: block;
+		display: block !important;
 	}
 	.highres {
 		display: none !important;
