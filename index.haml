@@ -98,31 +98,69 @@
           %p echoplexus will attempt to embed any image URLs directly into the Media bar on the right side. Similarly, it will attempt to parse YouTube URLs and embed an object. When the server encounters a URL, it can take a screenshot of the page in question along and attempt to provide a short excerpt to the user. To protect your privacy, media embedding is disabled for the client by default.
           %p You can edit any message you've sent up to 2 hours ago, as long as you haven't lost your connection. This duration is configurable by server operators. You can do this by double clicking the message, or clicking the pencil icon that appears while hovering the message.
           %p When you join a channel, you'll automatically sync some of the most recent chat history you may have missed while you were away. At any time, you can pull the chatlog history for that channel.
+
           %h2 Currently Supported Commands:
           %ul
-            %li `/join [channel_name]`: Join a channel
-            %li `/leave`: Leaves the current channel
-            %li `/topic [topic string]`: Set the topic of conversation for the channel (the message that sits visible at all times at the top)
-            %li `/broadcast [a chat message]`: Send the message to every channels that you're connected to.  Alias: `/bc`
-            %li `/nick [your_nickname]`: Changes your name from Anonymous; this preference is stored in a cookie on a per channel basis
-            %li `/private [channel_password]`: Makes a channel private.  Only those with the password may enter it.
-            %li `/password [channel_password]`: Supply the password to a private channel after joining it.  Incorrect attempts will notify everybody in the room.
-            %li `/public`: Make the private channel a public channel.
-            %li `/whisper [nickname]`: Send a private message that is visible to anybody with the nickname you've supplied.  Aliases: `/w`, `/tell`, `/t`, `/pm`.  *Pro-tip:* Press "ctrl+r" to quick-reply to the last person who has whispered you.
-            %li `/pull [N]`: Sync the N latest chat messages that you've missed while you weren't connected to the channel.  Currently, maximum is set to 100 for UI responsiveness until a more efficient rendering method is added.
-            %li `[partial nickname]+<TABKEY>`: Autocompletes (based on L-Distance) to the name of somebody in the channel
-            %li `@[nickname]`: Gets the attention of the user in question
-            %li `/color [#FFFFFF]`: Supply a 6-digit hex code with or without the `#`, and change your nickname's color
-            %li `/edit #[integer] [new body text]`: Changes the body text of a specific message to something else.  Useful for correcting typos and censoring yourself.  You can also double click on a chat message to edit inline-- press enter to confirm, escape or click elsewhere to cancel.
-            %li `>>[integer]`: Quotes a specific chat message.  Clicking the Reply icon on the chat message will automatically add this for you.
-            %li `/chown [password]`: Become the channel owner.  This gives you all permissions in the channel and allows you to `/chmod`
-            %li `/chmod [(+|-)permissionName] [optional username]`:  This allows you to selectively toggle on/off certain permissions for the particular channel or user.  User permissions are checked first, and if not set, then channel permissions are checked.  If a username is not supplied, then the permission is specified at the channel level.
             %li
-              `/github track [github repo URL]`: This generates a URL that you can add to your repo's postreceive hooks on Github.
+              %code /join [channel_name]
+              %p Join a channel.  All channel names begin with "/", even if not supplied
+            %li
+              %code /leave
+              %p Leaves the currently active channel
+            %li
+              %code /topic [topic string]
+              %p Set the topic of conversation for the channel (the message that sits visible at all times at the top)
+            %li
+              %code /broadcast [a chat message]
+              %p Send the message to every channels that you're connected to.  Alias: `/bc`
+            %li
+              %code /nick [your_nickname]
+              %p Changes your name to whatever you desire.  This preference is stored in a cookie on a per channel basis
+            %li
+              %code /private [channel_password]
+              %p Makes a channel private.  Only those with the password may enter it.
+            %li
+              %code /password [channel_password]
+              %p Supply the password to a private channel after joining it.  Incorrect attempts will notify everybody in the room.
+            %li
+              %code /public
+              %p Make the private channel a public channel.
+            %li
+              %code /whisper [nickname]
+              %p Send a private message that is visible to anybody with the nickname you've supplied.  Aliases: `/w`, `/tell`, `/t`, `/pm`.  *Pro-tip:* Press "ctrl+r" to quick-reply to the last person who has whispered you.
+            %li
+              %code /pull [N]
+              %p Sync the N latest chat messages that you've missed while you weren't connected to the channel.  Currently, maximum is set to 100 for UI responsiveness until a more efficient rendering method is added.
+            %li
+              %code [partial nickname]+&lt;TABKEY&gt;
+              %p Autocompletes (based on L-Distance) to the name of somebody in the channel
+            %li
+              %code @[nickname]
+              %p Gets the attention of the user in question
+            %li
+              %code /color [#FFFFFF]
+              %p Supply a 6-digit hex code with or without the `#`, and change your nickname's color
+            %li
+              %code /edit #[integer] [new body text]
+              %p Changes the body text of a specific message to something else.  Useful for correcting typos and censoring yourself.  You can also double click on a chat message to edit inline-- press enter to confirm, escape or click elsewhere to cancel.
+            %li
+              %code >>[integer]
+              %p Quotes a specific chat message.  Clicking the Reply icon on the chat message will automatically add this for you.
+            %li
+              %code /chown [password]
+              %p
+                Become the channel owner.  This gives you all permissions in the channel and allows you to
+                %code /chmod
+            %li
+              %code /chmod [(+|-)permissionName] [optional username]
+              %p This allows you to selectively toggle on/off certain permissions for the particular channel or user.  User permissions are checked first, and if not set, then channel permissions are checked.  If a username is not supplied, then the permission is specified at the channel level.
+            %li
+              %code /github track [github repo URL]
+              %p This generates a URL that you can add to your repo's postreceive hooks on Github.
 
           %img{src: './img/features/github-integration-2.png'}
 
-          %p Example: `/chmod -canSpeak`: now everyone in the channel can't speak unless you do `/chmod [username] +canSpeak` to selectively enable it for a specific user.
+          %h2 Permissions
           %p The currently implemented list of permissions (and their defaults) includes:
           %ul
             %li canSetTopic: null
@@ -132,17 +170,52 @@
             %li canPullLogs: true
             %li canUploadFile: null
             %li canSetGithubPostReceiveHooks: null
+          %p Example: `/chmod -canSpeak`: now everyone in the channel can't speak unless you do `/chmod [username] +canSpeak` to selectively enable it for a specific user.
 
           %h2 Server-hosted file upload
-          %p You can upload a file by dragging it onto the "Media & Links" panel.  From there, you'll have the option of confirming the upload, as well as an image preview (if it is an image).
-          %p For server operators, this must be enabled in `config.js` (see `config.sample.js`).  You have the option of setting a max file size limit.  Further, it must be enabled on a per-channel basis by the channel operator.  If there is not yet a channel operator, you will need to `/chown [operator password]` to become it (see `Commands` above).
+          %img.pull-left{src: './img/features/file-upload.png'}
+          %p You can upload a file by dragging it onto the "Media & Links" panel.  From there, you'll have the option of confirming the upload, as well as an image preview.
+          %p
+            For server operators, this must be enabled in
+            %code config.coffee
+            (see
+            %code config.sample.js
+            ).  You have the option of setting a max file size limit.  Further, it must be enabled on a per-channel basis by the channel operator.  If there is not yet a channel operator, you will need to use
+            %code /chown [operator password]
+            to become it.
+          %p This feature is enabled on chat.echoplex.us, but channel owners must toggle it on.
+          .clear
+          %h2 Security focused
+          %img.pull-right{src: './img/features/security-focused.png'}
+          %p
+            Security is at the forefront of the design of echoplexus.  We don't require any kind of identification to use echoplexus on the
+            %a{href: "https://chat.echoplex.us"} chat.echoplex.us
+            server.  We strive to make sure our server configuration is the most secure, and provide a solid nginx SSL configuration for potential echoplexus server operators.
+          %p On echoplex.us, your data is not shared with anyone.  No analytics, no cookies tracking your visits, no scripts parsing the server logs to see how often you visit.
+          %p Images are not embedded by default.  User linked images can be embedded, but in some cases, you may not want to.  Embedding a 3rd party image implies downloading it from said server, which risks exposing information about you to that host.  A malicious user could find out your IP by linking the channel a picture that resides on his servers.
+          .clear
+          %h2 Linkable identity via PGP
+          %img.pull-left{src: './img/features/userlist-pgp.png'}
+          %p
+            PGP integration is baked right into echoplexus.  This means that you can sign and encrypt your messages with public-key infrastructure.  For more information on exactly what this entails, see
+            %a{href: 'https://blog.echoplex.us/2014/03/05/echoplexus-and-pgp/'} this blog post
+            describing what PGP is and roughly how it works.
+          %p Users with PGP enabled will be shown in the userlist with a key beside their name.  Clicking this key icon will cycle that public key's trust level between "Untrusted" (red), "Neutral" (orange), and "Trusted" (green).
+          %img.pull-right{src: './img/features/pgp-verified-chat-message.png'}
+          %p When users sign or encrypt their messages, you can check the status of those operations with icons displayed to the left of their username in the chat channel.  If a user usually signs his messages, and you trust that key, and the verification is successful, then you will see a green checkmark.
+          %p If he's using a different key that you don't trust, then you will see an orange checkmark.  If his signature doesn't check out (a potential sign of an impersonator), then you will see a red X.
+          %p
+            This way, anonymity/pseudonymity can coexist with strong identity guarantees!  You may not know exactly
+            %em who
+            your chat participant is, but you can verify that he is the same person that he was yesterday (if he's signing his messages).
+
       %section#code
         / https://www.flickr.com/photos/riebart/4466482623
         .readable-section
           %img{src: './img/features/coding.png'}
           %h1 Code
-          %p Currently, interactive and collaborative HTML & JavaScript is supported.  A sandboxed `iframe` is used to protect the contents of your browser, but just to be completely safe, no code is evaluated without your consent.  A `LiveReload` checkbox allows you to re-evaluate as you or someone else types.  A `Refresh` button resets & wipes the `iframe` state.
-          %p The `iframe` has access to `jQuery` and `underscore.js` for user convenience.  More libraries may be exposed in the future.
+          %p Currently, interactive and collaborative HTML & JavaScript is supported.  A sandboxed iframe is used to protect the contents of your browser, but just to be completely safe, no code is evaluated without your consent.  A LiveReload checkbox allows you to re-evaluate as you or someone else types.  The "Re-initialize Iframe" button resets & wipes the iframe back to its initial state (useful should it get messed up).
+          %p The iframe has access to jQuery and underscore.js for user convenience.  More libraries may be exposed in the future.
           %p We hope to support Ruby and Python next, in the near term.  Other languages will come based on support or &ndash; your contribution!
       %section#draw
         / https://www.flickr.com/photos/ellebeere/4605043024

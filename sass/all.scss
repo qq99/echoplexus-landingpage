@@ -15,6 +15,12 @@ body {
 	background: #fefefe;
 	color: #3A4145;
 }
+code {
+	font-family: monospace;
+	background: #eee;
+	padding: 0.25em;
+	font-weight: bold;
+}
 
 .clear {
 	&:before, &:after {
@@ -158,7 +164,7 @@ section#draw {
 		background: url(/img/art.jpg);
 		background-size: cover;
 		background-position-y: -200px;
-	  opacity: 0.2;
+	  opacity: 0.1;
 	  top: 0;
 	  left: 0;
 	  bottom: 0;
