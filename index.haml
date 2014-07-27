@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title echoplexus v0.2.5
+    %title echoplexus v0.2.6
     %link{:rel => "stylesheet", :href => "css/all.min.css", :type => "text/css"}
     %link{:rel => "shortcut icon", :type => "image/png", :href => "/favicon.png"}
     %link{:href => "https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", :rel=>"stylesheet"}
@@ -17,7 +17,7 @@
     .flashy{style: 'height: 500px;'}
       %header.flashy-header
         echoplexus
-        %small.accent v0.2.5
+        %small.accent v0.2.6
       %img.flashy-logo{:width=>"180", :height=>"180", :src => "img/echoplexus-logo.png"}
     .main-content
       %header.top-header.pure-u-1
@@ -161,6 +161,12 @@
             %li
               %code /github track [github repo URL]
               %p This generates a URL that you can add to your repo's postreceive hooks on Github.
+            %li
+              %code /roll [1d20|2d30|5d6|XdY]
+              %p RPG players will enjoy this command, allowing you to command the server to roll a set of dice of certain multiples.  Each roll is displayed then added together.  Trying to roll an invalid dice format will default to a d20.  Aliases: `/r`
+            %li
+              %code /destroy
+              %p If you are the channel owner, you can delete the entire chatlog history for the channel in question.  There is no recovery!
 
           %img{src: './img/features/github-integration-2.png'}
 
@@ -189,6 +195,12 @@
             to become it.
           %p This feature is enabled on chat.echoplex.us, but channel owners must toggle it on.
           .clear
+          %h2 A bridge to IRC networks
+          %p Many people that use group-chat based messengers will be familiar to IRC.  Some may not wish to have to start up 2 clients to use IRC and echoplexus.  As of 0.2.6, you can now connect to an IRC channel using echoplexus as your middleman.  For some, this might be a preferable way to connect to an IRC network, obfuscating your IP.
+          %ul
+            %li Echoplexus operators can theoretically see all messages to/from any IRC network, so keep that in mind!
+            %li Each room you join in a specific network is actually a new connection established by echoplexus.  As such, IRC will require you to use a different nickname since it will consider your 2+ rooms different people connecting.  This is a known limitation in echoplexus at the moment.  If enough people use the IRC feature regularly enough, we may be able to multiplex a single IRC connection.
+            %li Some features, like PGP and encryption, may not work properly when used through IRC
           %h2 Security focused
           %img.pull-right{src: './img/features/security-focused.png'}
           %p
@@ -198,6 +210,28 @@
           %p On echoplex.us, your data is not shared with anyone.  No analytics, no cookies tracking your visits, no scripts parsing the server logs to see how often you visit.
           %p Images are not embedded by default.  User linked images can be embedded, but in some cases, you may not want to.  Embedding a 3rd party image implies downloading it from said server, which risks exposing information about you to that host.  A malicious user could find out your IP by linking the channel a picture that resides on his servers.
           .clear
+          %h2 Private channels and channel ownership
+          %p
+            You'll notice the padlock icon above the chat input area. When you click this button, you'll have the option of providing a shared secret (you should negotiate this through a secure side channel,
+            %strong not on echoplexus
+            ). Once supplied, the button will change to Encrypted. Encryption is performed with the Crypto-JS library (256-bit AES).
+          %p
+            Furthermore,
+            %a{href: "https://blog.echoplex.us/2014/03/05/echoplexus-and-pgp/" } you can use PGP signatures and/or PGP encryption.
+            You can layer your PGP encrypted messages with shared secret encryption.
+          %p Things that are not encrypted with this shared secret:
+          %ul
+            %li Draw (infeasible, stream of data, low impact)
+            %li Code (infeasible, stream of data, higher impact)
+            %li Call (secure transmission is baked into WebRTC)
+          %p Specific things that will not while encrypted:
+          %ul
+            %li Permissions set on a specific user (since the server doesn't know their nickname)
+            %li PhantomJS webshot previews (since the server can't read the body text to screenshot the URL)
+            %li Any other commands that rely on server knowing the body contents of a message
+          %h2 Encryption
+          %p You can make a channel private to only those who know a shared password via the /private command. To do that, you must become the channel owner with the /chown command.
+          %p Your private channel and channel owner passwords are first salted with 256 random bytes from node's crypto.randomBytes. Then, they are run through 4096 iterations of crypto.pbkdf2 with a key length of 256 bytes before the is stored in Redis. In your deployment, these measures can be considered meaningless if you do not use HTTPS.
           %h2 Linkable identity via PGP
           %img.pull-left{src: './img/features/userlist-pgp.png'}
           %p
@@ -263,6 +297,7 @@
           %p Others use IRC. However, it's somewhat time consuming to set up a server, many people don't really want to set up a client, and they certainly don't want to configure servers and ports in their client. In the end, most of the users are stuck with a text-only interface (no rich media). Your IP is also visible to others unless you go through measures to hide it.
           %p Other services (like Google Talk / Hangouts) are OK, but by default they are 1v1 chat, a closed client platform, and cloud-based.
           %p Almost all of the alternatives require you to specifiy some kind of name before you start chatting. Worse, register with an e-mail address. I always thought the biggest barrier was requiring the user to perform actions he doesn't care about completing -- he's got many other things to do! Anonymity can be conducive to great conversations.
+          %h1 Future goals
       %section#whatsnew
         .readable-section
           %h1 What's new?
