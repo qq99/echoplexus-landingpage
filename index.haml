@@ -246,7 +246,13 @@
             This way, anonymity/pseudonymity can coexist with strong identity guarantees!  You may not know exactly
             %em who
             your chat participant is, but you can verify that he is the same person that he was yesterday (if he's signing his messages).
-
+          %h2 Embeddable
+          %p
+            Use echoplexus as a widget on your site.
+            %code <iframe src="https://embed.echoplex.us/embed.html?channel=/echoplexus-news
+            frameborder="0"></iframe>
+          %div
+            %iframe.echoplexus-frame{:eventual_src => "https://embed.echoplex.us/embed.html?channel=/", :frameborder=> "0"}
       %section#code
         / https://www.flickr.com/photos/riebart/4466482623
         .readable-section
@@ -302,11 +308,13 @@
         .readable-section
           %h1 What's new?
           %p
-            Please take a look at the channel
-            %a{:href=>"https://chat.echoplex.us/echoplexus-news"} /echoplexus-news
-            for the latest in updates for both the echoplexus project and this instance:
-          %div
-            %iframe.echoplexus-frame{:eventual_src => "https://embed.echoplex.us/embed.html?channel=/echoplexus-news", :frameborder=> "0"}
+            Please take a look at the
+            %a{href: "https://github.com/qq99/echoplexus/blob/master/CHANGELOG.md"} CHANGELOG
+            hosted on Github for detailed information on what's changed between releases.
+          %p
+            Generally, you will want to download and use the newest release,
+            %a{href: "https://github.com/qq99/echoplexus/releases"} tagged here
+
       %section#install
         .readable-section
           %h1 Installation
