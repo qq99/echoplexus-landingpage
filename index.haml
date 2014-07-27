@@ -248,9 +248,9 @@
             your chat participant is, but you can verify that he is the same person that he was yesterday (if he's signing his messages).
           %h2 Embeddable
           %p
-            Use echoplexus as a widget on your site.
-            %code &lt;iframe src="https://embed.echoplex.us/embed.html?channel=/echoplexus-news
-            frameborder="0"&gt;&lt;/iframe&gt;
+            Use echoplexus as a widget on your site.  e.g.,
+            %br
+            %code &lt;iframe src="https://embed.echoplex.us/embed.html?channel=/echoplexus-news frameborder="0"&gt;&lt;/iframe&gt;
           %div
             %iframe.echoplexus-frame{:eventual_src => "https://embed.echoplex.us/embed.html?channel=/", :frameborder=> "0"}
       %section#code
@@ -304,6 +304,14 @@
           %p Other services (like Google Talk / Hangouts) are OK, but by default they are 1v1 chat, a closed client platform, and cloud-based.
           %p Almost all of the alternatives require you to specifiy some kind of name before you start chatting. Worse, register with an e-mail address. I always thought the biggest barrier was requiring the user to perform actions he doesn't care about completing -- he's got many other things to do! Anonymity can be conducive to great conversations.
           %h1 Future goals
+          %ul
+            %li Distributed network of many echoplexus servers
+            %li Peer2Peer file transfer via WebRTC
+            %li Peer2Peer chat, boostrapped by Echoplexus (to facilitate off-the-record communication)
+            %li Increased selection of languages for the real-time collaborative REPL
+          %p
+            Be sure to check out the
+            %a{href: "https://github.com/qq99/echoplexus/issues?labels=enhancement&milestone=&page=1&state=open"} planned enhancements
       %section#whatsnew
         .readable-section
           %h1 What's new?
